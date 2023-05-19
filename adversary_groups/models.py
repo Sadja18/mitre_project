@@ -11,7 +11,7 @@ class AdversaryGroup(models.Model):
     class Meta:
         verbose_name = "Adversary Group"
         verbose_name_plural = "Adversary Groups"
-        ordering = ["group_name"]
+        ordering = ["group_id",]
 
     def __str__(self):
-        return str(self.group_name)
+        return str(self.group_id) +  " :: " + str(self.group_name)
