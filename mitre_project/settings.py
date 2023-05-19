@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_quill',
     'adversary_groups',
-    'tactics'
+    'tactics',
+    'techniques',
+    'sub_techniques',
+    'adversary_preferences'
 ]
 
 MIDDLEWARE = [
