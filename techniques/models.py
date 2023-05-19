@@ -12,7 +12,7 @@ class Technique(models.Model):
     tactics = models.ManyToManyField(Tactic)
 
     def __str__(self):
-        return self.technique_name + " :: " + str(self.technique_id)
+        return self.technique_name
     
     class Meta:
         ordering = ["technique_id",]

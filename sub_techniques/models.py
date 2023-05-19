@@ -10,3 +10,7 @@ class SubTechnique(models.Model):
 
     def __str__(self):
         return self.subtechnique_name
+    
+    class Meta:
+        verbose_name = "Sub Technique"
+        verbose_name_plural = "Sub Techniques"

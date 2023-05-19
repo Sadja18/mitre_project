@@ -13,7 +13,7 @@ from .models import Technique
 # admin.site.register(Technique)
 class TechniqueAdmin(admin.ModelAdmin):
     list_display = ('technique_id', 'technique_name', 'get_tactics')
-    search_fields = ['technique_name', 'technique_id', 'get_tactics']
+    search_fields = ['technique_name', 'technique_id']
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == 'tactics':

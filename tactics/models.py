@@ -8,7 +8,7 @@ class Tactic(models.Model):
     tactic_description = QuillField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.tactic_id) + " :: " + str(self.tactic_name)
+        return str(self.tactic_name)
     
     class Meta:
         ordering = ['tactic_id',]
