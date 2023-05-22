@@ -12,7 +12,7 @@ class SubTechnique(models.Model):
     technique = models.ForeignKey(Technique, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.subtechnique_name
+        return str(self.subtechnique_id)+self.subtechnique_name
     
     def save(self, *args, **kwargs):
         if self.technique:
