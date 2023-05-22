@@ -1,11 +1,6 @@
-from typing import Any, Optional
 from django.contrib import admin
 
 from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.db.models.fields.related import ManyToManyField
-from django.forms.models import ModelMultipleChoiceField
-from django.http.request import HttpRequest
-from django.urls import reverse
 
 # Register your models here.
 from .models import Technique
