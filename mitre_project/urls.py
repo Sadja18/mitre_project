@@ -19,7 +19,10 @@ from django.urls import path
 
 from techniques.views import search_tactics
 
+from sub_techniques.views import search_techniques
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('search_tactics/', search_tactics, name='search_tactics')
+    path('search_tactics/', search_tactics, name='search_tactics'),
+    path('search_techniques/', search_techniques, name='search_techniques')
 ]
