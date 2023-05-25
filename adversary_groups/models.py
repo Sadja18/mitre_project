@@ -14,4 +14,4 @@ class AdversaryGroup(models.Model):
         ordering = ["group_id",]
 
     def __str__(self):
-        return str(self.group_id) +  " :: " + str(self.group_name)
+        return str(self.group_id) +  " " + str(self.group_name)

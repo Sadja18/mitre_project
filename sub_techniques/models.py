@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, IntegrityError
 
 from django_quill.fields import QuillField
 
@@ -12,21 +12,26 @@ class SubTechnique(models.Model):
     technique = models.ForeignKey(Technique, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.subtechnique_id)+self.subtechnique_name
+        return str(self.subtechnique_id) + " " + self.subtechnique_name
     
     def save(self, *args, **kwargs):
         if self.technique:
             technique_id = self.technique.technique_id
             subtechnique_id = self.subtechnique_id
 
-            if technique_id in subtechnique_id:
-                print(subtechnique_id)
-                print(technique_id)
-                super().save(*args, **kwargs)
-                
-            else:
-                self.subtechnique_id = f"{self.technique.technique_id}.{self.subtechnique_id}"
-                super().save(*args, **kwargs)
+            try:
+                if technique_id in subtechnique_id:
+                    print(subtechnique_id)
+                    print(technique_id)
+                    super().save(*args, **kwargs)
+                    
+                else:
+                    self.subtechnique_id = f"{self.technique.technique_id}.{self.subtechnique_id}"
+                    super().save(*args, **kwargs)
+            except IntegrityError as e:
+                print('already exists')
+            except Exception as e:
+                print('exception occurred')
 
     class Meta:
         verbose_name = "Sub Technique"
