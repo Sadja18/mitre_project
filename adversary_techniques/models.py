@@ -30,3 +30,4 @@ class AdversaryTechniques(models.Model):
     class Meta:
         verbose_name = "Adversary Technique"
         verbose_name_plural = "Adversary Techniques"
+        ordering = ['row_id']

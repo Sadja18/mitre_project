@@ -1,23 +1,30 @@
 from django.contrib import admin
-from django.forms import ModelForm, Select
+
+from django.contrib.admin import widgets
 
 from .models import AdversaryTechniques
 
-class AdversaryTechniquesForm(ModelForm):
-    class Meta:
-        model = AdversaryTechniques
-        fields = '__all__'
-        widgets = {
-            'technique': Select(attrs={'class': 'technique-select'}),
-            'sub_technique': Select(attrs={'class': 'sub-technique-select'}),
-        }
-
 class AdversaryTechniquesAdmin(admin.ModelAdmin):
-    list_display = ['adversary_group', 'tactic', 'technique', 'sub_technique']
+    list_display = ['row_id', 'adversary_group', 'tactic', 'technique', 'sub_technique']
     list_filter = ['adversary_group', 'tactic', 'technique']
-    form = AdversaryTechniquesForm
+
+    autocomplete_fields = ['technique', 'sub_technique']
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name in ['technique', 'sub_technique']:
+            kwargs['widget'] = widgets.ForeignKeyRawIdWidget(db_field.remote_field, self.admin_site)
+            kwargs['queryset'] = db_field.remote_field.model.objects.all()
+            return db_field.formfield(**kwargs)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     class Media:
-        js = ('admin/custom.js',)
+        js = [
+            'admin/js/jquery.init.js',
+            'autocomplete_light/jquery.init.js',
+            'autocomplete_light/autocomplete.init.js',
+        ]
+        css = {
+            'all': ['autocomplete_light/style.css'],
+        }
 
 admin.site.register(AdversaryTechniques, AdversaryTechniquesAdmin)
