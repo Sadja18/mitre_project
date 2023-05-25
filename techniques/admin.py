@@ -9,6 +9,7 @@ from .models import Technique
 # admin.site.register(Technique)
 class TechniqueAdmin(admin.ModelAdmin):
     list_display = ('technique_id', 'technique_name', 'get_tactics')
+    list_filter = ['tactics']
     search_fields = ['technique_name', 'technique_id', 'tactics__tactic_name', 'tactics__tactic_id']
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
